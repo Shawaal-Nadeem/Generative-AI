@@ -21,11 +21,6 @@ Install:
 
     pip install -r requirements.txt
 
-
-## Envirnoment Variables
-
-Rename .env_bak to .env and save your keys in this file
-
 ### Get Open API Keys:
 
 https://platform.openai.com/account/api-keys 
