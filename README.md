@@ -249,11 +249,6 @@ Reference Material:
 
 [Build and Learn: AI App Development for Beginners: Unleashing ChatGPT API with LangChain & Streamlit](https://www.amazon.com/Build-Learn-Development-Beginners-Unleashing/dp/B0CDNNC5Z1/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1695978776&sr=8-1) 
 
-## Fundamentals of GenAI Quiz
-
-Total Questions: 40
-
-Duration: 60 minutes 
 
 
 
