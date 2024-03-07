@@ -1,0 +1,1 @@
+By the help of code whisper extension i only write commented line and 1-2 sec hold it will show me the code which i want to write
