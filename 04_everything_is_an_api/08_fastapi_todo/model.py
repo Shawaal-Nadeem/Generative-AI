@@ -6,25 +6,31 @@ app=FastAPI()
 
 class Todos(BaseModel):
     title: str
+
     @app.post("/todos")
-    def addTodos(self, todoTitle:str = Body(embed=True), conStr:str = Body(embed=True)):
+    def addTodos(todoTitle:str = Body(embed=True)):
        
-    #    db = Database()
-    #    db.setConnectString(conStr)
-    #    db.post_method(todoTitle) 
-       data_dict={
-           "title": todoTitle
-       }
-       return f"{data_dict} Added Successfully"
+       db = Database()
+       db.setConnectString("postgresql://hafizshawalnadeem:2DlRFczTPe9J@ep-patient-grass-a52tfj3b.us-east-2.aws.neon.tech/neondb?sslmode=require")
+       db.post_method(todoTitle) 
+       
+       return {"title":todoTitle}
 
-    def deleteTodos(self, todoId:int):
-        pass
+    @app.put("/todos/{todoId}")
+    def updateTodos(todoId:int, todoTitle:str = Body(embed=True)):
+        db = Database()
+        db.setConnectString("postgresql://hafizshawalnadeem:2DlRFczTPe9J@ep-patient-grass-a52tfj3b.us-east-2.aws.neon.tech/neondb?sslmode=require")
+        db.put_method(todoId,todoTitle) 
 
-    def updateTodos(self, todoId:int, todoTitle:str):
-        pass
+        return {"title":todoTitle}
 
-    def getTodos(self, todoId:int):
-        pass
+    @app.delete("/todos/{todoId}")
+    def deleteTodos(todoId:int):
+        db = Database()
+        db.setConnectString("postgresql://hafizshawalnadeem:2DlRFczTPe9J@ep-patient-grass-a52tfj3b.us-east-2.aws.neon.tech/neondb?sslmode=require")
+        db.delete_method(todoId)
+
+        return {"title Id":todoId}
 
     @app.get("/todos")
     def getAllTodos():
