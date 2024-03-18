@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "poetry-fast-api-todo"
+name = "crud-fastapi"
 version = "0.1.0"
 description = ""
 authors = ["Shawaal Nadeem <110089331+Shawaal-Nadeem@users.noreply.github.com>"]
@@ -8,13 +8,13 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.110.0"
+sqlmodel = "^0.0.16"
+python-dotenv = "^1.0.1"
+psycopg2 = "^2.9.9"
 uvicorn = "^0.28.0"
 streamlit = "^1.32.2"
-pydantic = "^2.6.4"
 requests = "^2.31.0"
-sqlalchemy = "^2.0.28"
-psycopg2-binary = "^2.9.9"
-python-dotenv = "^1.0.1"
+pandas = "^2.2.1"
 
 
 [build-system]
