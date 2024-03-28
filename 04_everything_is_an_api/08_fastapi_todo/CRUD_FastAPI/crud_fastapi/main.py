@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
-from sqlalchemy import Select
-from sqlmodel import Field, SQLModel, Session, create_engine
+from sqlmodel import Field, SQLModel, Session, create_engine, select
 from typing import Annotated
 import os
 
@@ -26,8 +25,8 @@ def get_Session():
 
 @app.get("/todos")
 def get_todos(session:Annotated[dict,Depends(get_Session)]):
-    query = Select(Todo)
-    todos = session.execute(query).all()
+    query = select(Todo)
+    todos = session.exec(query).all()
     return todos
 
 @app.post("/todos")
