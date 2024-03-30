@@ -27,11 +27,11 @@ def test_create_todo():
     assert response.json()["description"] == "Test description"
 
 def test_delete_todo():
-    response = client.delete("/todos/4")
+    response = client.delete("/todos/5")
     assert response.status_code == 200
 
 def test_update_todo():
-    response = client.put("/todos/5", json={"title": "Updated todo", "description": "Updated description"})
+    response = client.put("/todos/6", json={"title": "Updated todo", "description": "Updated description"})
     assert response.status_code == 200
     assert response.json()["title"] == "Updated todo"
     assert response.json()["description"] == "Updated description"

@@ -1,9 +1,10 @@
-from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from sqlmodel import Field, SQLModel, Session, create_engine, select
 from typing import Annotated
-import os
+# from .settings import conn_str   #uncomment this while testing pytest
+from settings import conn_str  
 
+print(conn_str)
 
 class Todo(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
@@ -18,8 +19,7 @@ class CreateTodo(SQLModel):
 app = FastAPI()
 
 def get_Session():
-    load_dotenv()
-    engine = create_engine(os.getenv("conn_str"))
+    engine = create_engine(conn_str)
     with Session(engine) as session:
         yield session
 
