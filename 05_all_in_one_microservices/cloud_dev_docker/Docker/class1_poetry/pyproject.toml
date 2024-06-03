@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "class1-poetry"
+version = "0.1.0"
+description = ""
+authors = ["Shawaal Nadeem <110089331+Shawaal-Nadeem@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sqlmodel = "^0.0.18"
+streamlit = "^1.35.0"
+psycopg2 = "^2.9.9"
+uvicorn = "^0.30.1"
+fastapi = "^0.111.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
