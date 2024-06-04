@@ -1,7 +1,6 @@
 from fastapi import Depends, FastAPI
 from sqlmodel import Field, SQLModel, Session, create_engine, select
 from typing import Annotated
-# from .settings import conn_str   #uncomment this while testing pytest
 from .settings import conn_str  
 
 print(conn_str)
