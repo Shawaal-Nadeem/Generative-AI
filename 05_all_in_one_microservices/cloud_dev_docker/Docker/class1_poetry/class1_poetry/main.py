@@ -61,18 +61,15 @@ async def create_todo(todo: CreateTodo, session:Annotated[dict,Depends(get_Sessi
     await producer.start()
     try:
         todo = Todo.model_validate(todo)
-        # Produce message
+        session.add(todo)
+        session.commit()
+        session.refresh(todo)
         await producer.send_and_wait("todos", todo.model_dump_json().encode('utf-8'))
     finally:
         # Wait for all pending messages to be delivered or expire.
         await producer.stop()
 
     return todo.model_dump_json()       
-    # todo = Todo.model_validate(todo)
-    # session.add(todo)
-    # session.commit()
-    # session.refresh(todo)
-    # return todo
 
 @app.delete("/todos/{id}")
 def delete_todo(id: int, session:Annotated[dict,Depends(get_Session)]):
