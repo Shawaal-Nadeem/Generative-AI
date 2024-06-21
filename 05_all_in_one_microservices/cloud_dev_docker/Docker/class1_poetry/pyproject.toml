@@ -13,6 +13,7 @@ psycopg2 = "^2.9.9"
 uvicorn = "^0.30.1"
 fastapi = "^0.111.0"
 aiokafka = "^0.10.0"
+protobuf = "^5.27.1"
 
 
 [build-system]

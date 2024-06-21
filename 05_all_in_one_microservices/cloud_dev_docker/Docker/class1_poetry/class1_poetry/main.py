@@ -6,6 +6,8 @@ from .settings import conn_str
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 import asyncio
 
+import todo_pb2
+
 async def consume(topic:str, bootstrap_servers:str):
     consumer = AIOKafkaConsumer(
         topic,
@@ -16,8 +18,11 @@ async def consume(topic:str, bootstrap_servers:str):
     try:
         # Consume messages
         async for msg in consumer:
-            print("consumed: ", msg.topic, msg.partition, msg.offset,
-                  msg.key, msg.value, msg.timestamp)
+            print("consumed: ", msg.value)
+            # Deserialize Data
+            get_data = todo_pb2.Todo_proto()
+            get_data.ParseFromString(msg.value)
+            print(f"Deserialize Data : ", {get_data.title , get_data.description})
     finally:
         # Will leave consumer group; perform autocommit if enabled.
         await consumer.stop()
@@ -61,10 +66,18 @@ async def create_todo(todo: CreateTodo, session:Annotated[dict,Depends(get_Sessi
     await producer.start()
     try:
         todo = Todo.model_validate(todo)
-        session.add(todo)
-        session.commit()
-        session.refresh(todo)
-        await producer.send_and_wait("todos", todo.model_dump_json().encode('utf-8'))
+        # session.add(todo)
+        # session.commit()
+        # session.refresh(todo)
+        add_data = todo_pb2.Todo_proto(
+            title=todo.title,
+            description=todo.description
+        )
+        # Serialize Data
+        protoc_data = add_data.SerializeToString()
+        print(f"Serialize Data : ", {protoc_data})
+
+        await producer.send_and_wait(topic = "todos", value = protoc_data)  
     finally:
         # Wait for all pending messages to be delivered or expire.
         await producer.stop()
