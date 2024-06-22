@@ -7,6 +7,15 @@
 		"context": "..",
 		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 		"dockerfile": "../Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode-remote.remote-containers",
+				"ms-python.python",
+				"ms-vscode-remote.remote-wsl"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.

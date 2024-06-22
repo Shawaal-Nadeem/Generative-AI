@@ -1,8 +1,10 @@
+name: fastapi_todo
 services:
   api:
     build:
         context: ./class1_poetry
         dockerfile: Dockerfile
+    container_name: fastapi_todo_container
     ports:
       - 8000:8000
     volumes:
