@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "class8-compose-db"
+version = "0.1.0"
+description = ""
+authors = ["Shawaal Nadeem <110089331+Shawaal-Nadeem@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.1"
+psycopg2 = "^2.9.9"
+sqlmodel = "^0.0.19"
+starlette = "^0.37.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

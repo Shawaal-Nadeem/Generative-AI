@@ -1,0 +1,36 @@
+name: class8
+services:
+  api:
+    build:
+      context: ./class8_compose_db
+      dockerfile: Dockerfile
+    container_name: class8_compose_db_fastapi_Cont
+    ports:
+      - "8000:8000"
+    networks:
+      - my-network
+    depends_on:
+      - postgres_db
+    
+
+  postgres_db:
+    image: postgres:latest
+    restart: always
+    container_name: postgres_db_container
+    environment:
+      - POSTGRES_USER=shawaalnadeem
+      - POSTGRES_PASSWORD=my_password
+      - POSTGRES_DB=mydatabase
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+volumes:
+  postgres_db:
+    driver: local
+
+networks:
+  my-network:
