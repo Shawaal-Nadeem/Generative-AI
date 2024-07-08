@@ -1,0 +1,11 @@
+name: class11
+services:
+  api:
+    build:
+      context: ./oauth2_fastapi
+      dockerfile: Dockerfile
+    container_name: class11_oauth2_fastapi_Cont
+    ports:
+      - "8000:8000"
+    
+    
