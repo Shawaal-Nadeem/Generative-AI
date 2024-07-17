@@ -19,7 +19,7 @@ app:FastAPI = FastAPI(lifespan=lifespan)
 
 @app.get("/")
 def main_page():
-    return {"message" : "Todos Page (/todos to the url to see todos )"}
+    return {"message" : "Todos Page (/todos to the url to see todos)"}
 
 @app.get("/todos")
 def get_Todos(session: Annotated[Session, Depends(get_Session)]):
