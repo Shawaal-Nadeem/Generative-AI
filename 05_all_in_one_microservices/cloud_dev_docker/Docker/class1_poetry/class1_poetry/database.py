@@ -1,13 +1,15 @@
 from sqlmodel import SQLModel, Field, create_engine, Session
-from typing import Optional
+from typing import Generator, Optional
 from dotenv import load_dotenv
 import os
+from contextlib import contextmanager
 
 
 
 load_dotenv()
 
-def get_Session():
+@contextmanager
+def get_Session()->Generator[Session,None,None]:
     engine = create_engine(os.getenv("conn_str"))
     with Session(engine) as session:
         yield session

@@ -10,9 +10,10 @@ from aiokafka import AIOKafkaProducer
 
 @asynccontextmanager
 async def lifespan(app:FastAPI)->AsyncGenerator: 
-    print("Consumer Lifespan Start .....")
-    asyncio.create_task(consume_todo(topic="todos", bootstrap_servers="broker:19092"))
+    print("Consumer Lifespan Start ......")
+    task = asyncio.create_task(consume_todo(topic="todos", bootstrap_servers="broker:19092"))
     yield
+    task.cancel()
 
 
 app:FastAPI = FastAPI(lifespan=lifespan)

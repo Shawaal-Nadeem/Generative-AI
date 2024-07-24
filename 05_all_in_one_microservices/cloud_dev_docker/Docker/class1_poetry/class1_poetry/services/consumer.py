@@ -7,7 +7,7 @@ async def consume_todo(topic:str, bootstrap_servers:str):
     consumer = AIOKafkaConsumer(
         topic,
         bootstrap_servers = bootstrap_servers,
-        group_id="todo-group"),
+        group_id="todo-group")
     
     # Get cluster layout and join group `my-group`
     await consumer.start()
@@ -22,10 +22,10 @@ async def consume_todo(topic:str, bootstrap_servers:str):
             get_data.ParseFromString(msg.value)
             print(f"Deserialize Data : ", {get_data.title , get_data.description})
 
-            async with next(get_Session()) as session:
+            with get_Session() as session:
                 add_todo = await create_todo(todo=get_data, session=session)
                 print ("Added Data: ", add_todo)
-                return get_data
+                
 
     finally:
         # Will leave consumer group; perform autocommit if enabled.

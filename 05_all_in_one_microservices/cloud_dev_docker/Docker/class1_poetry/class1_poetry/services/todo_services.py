@@ -9,12 +9,14 @@ def get_todos(session:Session):
     return todos
 
 async def create_todo(todo: todo_pb2.Todo_proto, session:Session):
-    
-    todo = Todo(title=todo.title, description=todo.description)
-    session.add(todo)
-    session.commit()
-    session.refresh(todo)
-    return todo
+    try:
+        todo = Todo(title=todo.title, description=todo.description)
+        session.add(todo)
+        session.commit()
+        session.refresh(todo)
+        return todo
+    except Exception as e:
+        print('Todo Post Error is : ',e)
 
 
 def delete_todo(id: int, session:Session):
