@@ -32,4 +32,3 @@ def update_todo(id: int, todo: todo_pb2.Todo_proto, session:Session):
     session.commit()
     session.refresh(todo_update)
     return todo_update
-

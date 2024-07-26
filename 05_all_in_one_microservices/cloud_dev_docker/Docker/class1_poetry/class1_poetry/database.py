@@ -5,13 +5,17 @@ import os
 from contextlib import contextmanager
 
 
-
 load_dotenv()
 
 @contextmanager
-def get_Session()->Generator[Session,None,None]:
+def get_Session() -> Generator[Session, None, None]:
     engine = create_engine(os.getenv("conn_str"))
-    with Session(engine) as session:
+    session = Session(engine)
+    yield session
+ 
+
+def get_session_dependency() -> Generator[Session, None, None]:
+    with get_Session() as session:
         yield session
 
 

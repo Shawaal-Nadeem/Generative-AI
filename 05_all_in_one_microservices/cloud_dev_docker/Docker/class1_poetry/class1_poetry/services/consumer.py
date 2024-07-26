@@ -30,4 +30,3 @@ async def consume_todo(topic:str, bootstrap_servers:str):
     finally:
         # Will leave consumer group; perform autocommit if enabled.
         await consumer.stop()
-

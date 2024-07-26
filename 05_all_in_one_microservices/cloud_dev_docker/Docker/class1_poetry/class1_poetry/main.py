@@ -23,7 +23,7 @@ def main_page():
     return {"message" : "Todos Page (/todos to the url to see todos)"}
 
 @app.get("/todos")
-def get_Todos(session: Annotated[Session, Depends(get_Session)]):
+def get_Todos(session: Annotated[Session, Depends(get_session_dependency)]):
     return get_todos(session=session)
 
 @app.post("/todos")
@@ -50,9 +50,9 @@ async def post_Todo(todo:CreateTodo):
 
 
 @app.put("/todos/{id}")
-def put_Todo(id: int, todo:CreateTodo, session: Annotated[Session, Depends(get_Session)]):
+def put_Todo(id: int, todo:CreateTodo, session: Annotated[Session, Depends(get_session_dependency)]):
     return update_todo(id=id, todo=todo, session=session)
 
 @app.delete("/todos/{id}")
-def delete_Todo(id: int, session: Annotated[Session, Depends(get_Session)]):
+def delete_Todo(id: int, session: Annotated[Session, Depends(get_session_dependency)]):
     return (delete_todo(id=id, session=session))
