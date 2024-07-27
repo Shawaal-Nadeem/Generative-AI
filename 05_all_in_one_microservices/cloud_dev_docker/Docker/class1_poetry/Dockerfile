@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /code
 
 COPY . /code/
-
-RUN pip install poetry --upgrade pip
+# --default-timeout=1000 is used because my network is not stable ... if your network is stable then don't apply 
+RUN pip install --default-timeout=1000 poetry --upgrade pip  
 
 RUN poetry config virtualenvs.create false
-
-RUN poetry install 
+# || (sleep 30 && poetry install) is used because my network is not stable ... if your network is stable then don't apply 
+RUN poetry install || (sleep 30 && poetry install)
 
 CMD [ "poetry", "run", "uvicorn", "class1_poetry.main:app", "--host", "0.0.0.0", "--reload" ]
